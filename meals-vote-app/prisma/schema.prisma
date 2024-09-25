@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Restaurant {
+  id        Int      @id @default(autoincrement())
+  name      String
+  address   String
+  foodPacks FoodPack[]
+}
+
+model FoodPack {
+  id           Int         @id @default(autoincrement())
+  name         String
+  items        Item[]
+  discount     Int?
+  image        String?
+  restaurantId Int
+  restaurant   Restaurant  @relation(fields: [restaurantId], references: [id])
+  votes        Vote[]
+}
+
+model Item {
+  id         Int       @id @default(autoincrement())
+  name       String
+  foodPackId Int
+  foodPack   FoodPack  @relation(fields: [foodPackId], references: [id])
+}
+
+model Employee {
+  id           Int    @id @default(autoincrement())
+  name         String
+  designation  String?
+  empId        Int @unique
+  bloodGroup   String?
+  votes        Vote[]
+}
+
+model Vote {
+  id         Int       @id @default(autoincrement())
+  foodPackId Int
+  foodPack   FoodPack  @relation(fields: [foodPackId], references: [id])
+  employeeId Int
+  employee   Employee  @relation(fields: [employeeId], references: [id])
+  createdAt  DateTime  @default(now())
+}
