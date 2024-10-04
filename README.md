@@ -36,7 +36,8 @@ Ensure that the following are installed on your system:
 
 ## Installation Process
 
-- Go to meals-vote-app and run "docker-compose up" in cmd 
+- Go to meals-vote-app and run "docker-compose up" in cmd
 - Go to meals-vote-web and run "docker-compose up" in cmd
 - Be patient while using this app
+- Swagger http://localhost:5000/api
 - Thank you
